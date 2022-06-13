@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_compass/flutter_compass.dart';
 
@@ -34,6 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     FlutterCompass.events!.listen((event) {
       heading = event.heading;
+      setState(() {});
     });
   }
 
@@ -51,7 +54,7 @@ class _HomeScreenState extends State<HomeScreen> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Text(
-            '${heading!.ceil()}',
+            '${heading!.ceil()}°',
             style: const TextStyle(
               color: Colors.white,
               fontSize: 26.0,
@@ -62,8 +65,20 @@ class _HomeScreenState extends State<HomeScreen> {
           const SizedBox(height: 50.0),
 
           // Compass
-          const Padding(
-            padding: EdgeInsets.all(18.0),
+          Padding(
+            padding: const EdgeInsets.all(18.0),
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                Image.asset('assets/cadrant.png'),
+
+                // Compass rotation
+                Transform.rotate(
+                  angle: ((heading ?? 0) * (pi / 180) * -1),
+                  child: Image.asset('assets/compass.png', scale: 1.1),
+                )
+              ],
+            ),
           )
         ],
       ),
