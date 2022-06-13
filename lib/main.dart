@@ -26,7 +26,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   // This set the compass
-  double? heading;
+  double? heading = 0;
 
   @override
   void initState() {
@@ -39,6 +39,34 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold();
+    return Scaffold(
+      backgroundColor: Colors.black,
+      appBar: AppBar(
+        backgroundColor: Colors.grey.shade900,
+        centerTitle: true,
+        title: const Text("Compass App"),
+      ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Text(
+            '${heading!.ceil()}',
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: 26.0,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+
+          const SizedBox(height: 50.0),
+
+          // Compass
+          const Padding(
+            padding: EdgeInsets.all(18.0),
+          )
+        ],
+      ),
+    );
   }
 }
